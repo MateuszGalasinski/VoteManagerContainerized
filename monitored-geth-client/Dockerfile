@@ -15,4 +15,6 @@ ADD start.sh /root/start.sh
 ADD app.json /root/eth-net-intelligence-api/app.json
 RUN chmod +x /root/start.sh
 
+EXPOSE 8545
+
 ENTRYPOINT /root/start.sh

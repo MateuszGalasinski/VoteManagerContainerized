@@ -1,5 +1,6 @@
 version: '2'
 services:
+
   bootstrap:
     build: monitored-geth-client
     restart: on-failure
@@ -17,6 +18,8 @@ services:
       - "30303:30303"
       - "30303:30303/udp"
       - "8545:8545"
+    expose:
+      - "8545"
 
   common-node:
     build: monitored-geth-client
@@ -42,6 +45,22 @@ services:
       - ./files/keystore:/root/.ethereum/devchain/keystore:rw
     command: '--datadir=~/.ethereum/devchain --rpccorsdomain="*" --networkid=456719 --rpc --bootnodes="enode://288b97262895b1c7ec61cf314c2e2004407d0a5dc77566877aad1f2a36659c8b698f4b56fd06c4a0c0bf007b4cfb3e7122d907da3b005fa90e724441902eb19e@XXX:30303"'
 
+  db:
+    build: ./users-db
+    expose:
+    - "3306"
+    - "33060"
+
+  api:
+    build: ./api
+    ports:
+    - "3010:3010"
+    links:
+    - db
+    - bootstrap
+    env_file:
+    - api/api.env
+
   netstats:
     build: eth-netstats
     restart: on-failure
@@ -50,3 +69,4 @@ services:
       - WS_SECRET=eth-net-stats-secret
     ports:
       - "3000:3000"
+      

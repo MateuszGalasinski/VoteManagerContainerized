@@ -97,3 +97,7 @@ To speed up the process, you can use a [pre-generated DAG](https://github.com/et
 ADD dag/full-R23-0000000000000000 /root/.ethash/full-R23-0000000000000000
 ```
 to the `monitored-geth-client` Dockerfile.
+
+
+personal.unlockAccount("0xc515db5834d8f110eee96c3036854dbf1d87de2b", "")
+
