@@ -99,5 +99,9 @@ ADD dag/full-R23-0000000000000000 /root/.ethash/full-R23-0000000000000000
 to the `monitored-geth-client` Dockerfile.
 
 
-personal.unlockAccount("0xc515db5834d8f110eee96c3036854dbf1d87de2b", "")
 
+geth attach ipc://root/.ethereum/devchain/geth.ipc
+
+personal.unlockAccount("0xc515db5834d8f110eee96c3036854dbf1d87de2b", "ether")
+
+miner.start(1)
