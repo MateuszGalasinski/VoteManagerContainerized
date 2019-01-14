@@ -47,19 +47,12 @@ services:
 
   db:
     build: ./users-db
+    ports:
+    - "3306:3306"
+    - "33060:33060"
     expose:
     - "3306"
     - "33060"
-
-  api:
-    build: ./api
-    ports:
-    - "3010:3010"
-    links:
-    - db
-    - bootstrap
-    env_file:
-    - api/api.env
 
   netstats:
     build: eth-netstats
